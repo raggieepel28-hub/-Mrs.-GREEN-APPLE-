@@ -181,12 +181,38 @@ main{
   cursor:pointer;
 }
 
-.hero button:active,
-.green-button:active,
-.tab:active,
-.month-btn:active,
-.mood:active{
-  transform:scale(.97);
+/* ================================
+   フォーム
+================================ */
+
+.form{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+}
+
+.form input{
+  width:auto;
+  min-width:0;
+  flex:1;
+}
+
+.form input[type="time"]{
+  flex:0 0 125px;
+}
+
+.form button{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  border:0;
+  border-radius:50%;
+  background:#7da88a;
+  color:#fff;
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
 }
 
 .info{
@@ -211,9 +237,7 @@ main{
   transition:.3s;
 }
 
-input,
-textarea,
-select{
+input,textarea,select{
   width:100%;
   border:1px solid #dce8d9;
   border-radius:14px;
@@ -235,27 +259,14 @@ select:focus{
   box-shadow:0 0 0 3px rgba(125,168,138,.12);
 }
 
-.form{
-  display:flex;
-  gap:6px;
-  margin-top:10px;
-}
-
-.form button{
-  width:42px;
-  flex-shrink:0;
-  border:0;
-  border-radius:50%;
-  background:#7da88a;
-  color:#fff;
-  font-size:20px;
-  cursor:pointer;
-}
+/* ================================
+   Todo / Schedule
+================================ */
 
 .item{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
   min-height:42px;
   padding:8px 3px;
   border-bottom:1px dashed #dfe9dc;
@@ -267,15 +278,31 @@ select:focus{
 
 .item .grow{
   flex:1;
+  min-width:0;
+  word-break:break-word;
+}
+
+.item input[type="checkbox"]{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  margin:0;
+  padding:0;
+  cursor:pointer;
 }
 
 .delete{
+  flex:0 0 auto;
   border:0;
   background:transparent;
   color:#a3b2a3;
   font-size:18px;
   cursor:pointer;
 }
+
+/* ================================
+   Calendar
+================================ */
 
 .calendar-head{
   display:flex;
@@ -326,6 +353,7 @@ select:focus{
   color:#66796a;
   text-align:center;
   cursor:pointer;
+  overflow:hidden;
 }
 
 .day.today{
@@ -343,6 +371,10 @@ select:focus{
   font-size:12px;
 }
 
+/* ================================
+   Mood
+================================ */
+
 .mood-grid{
   display:grid;
   grid-template-columns:repeat(6,1fr);
@@ -350,6 +382,7 @@ select:focus{
 }
 
 .mood{
+  width:100%;
   min-height:50px;
   border:1px solid #dfebdc;
   border-radius:14px;
@@ -362,6 +395,10 @@ select:focus{
   background:#e0eddc;
   border-color:#91b19a;
 }
+
+/* ================================
+   Photo
+================================ */
 
 .photo-box{
   display:flex;
@@ -382,6 +419,10 @@ select:focus{
   max-height:300px;
   object-fit:cover;
 }
+
+/* ================================
+   Grow
+================================ */
 
 .grow-stage{
   padding:25px;
@@ -434,6 +475,16 @@ footer{
   .mood-grid{
     gap:4px;
   }
+
+  .form input[type="time"]{
+    flex:0 0 105px;
+  }
+
+  .form button{
+    width:56px;
+    height:56px;
+    flex-basis:56px;
+  }
 }
 </style>
 </head>
@@ -441,72 +492,34 @@ footer{
 <body>
 
 <header>
-
-  <h1 class="logo">
-    Apple Days 🍏
-  </h1>
-
-  <div class="subtitle">
-    music · diary · little days
-  </div>
-
+  <h1 class="logo">Apple Days 🍏</h1>
+  <div class="subtitle">music · diary · little days</div>
 </header>
 
 <nav id="tabs">
-
-  <button class="tab active" data-page="home">
-    🏠 Home
-  </button>
-
-  <button class="tab" data-page="calendar">
-    📅 Calendar
-  </button>
-
-  <button class="tab" data-page="music">
-    🎧 Music
-  </button>
-
-  <button class="tab" data-page="diary">
-    📖 Diary
-  </button>
-
-  <button class="tab" data-page="mypage">
-    🍏 My Page
-  </button>
-
-  <button class="tab" data-page="grow">
-    🌱 Grow
-  </button>
-
+  <button class="tab active" data-page="home">🏠 Home</button>
+  <button class="tab" data-page="calendar">📅 Calendar</button>
+  <button class="tab" data-page="music">🎧 Music</button>
+  <button class="tab" data-page="diary">📖 Diary</button>
+  <button class="tab" data-page="mypage">🍏 My Page</button>
+  <button class="tab" data-page="grow">🌱 Grow</button>
 </nav>
 
 <main>
 
-<!-- =========================
-     HOME
-========================= -->
-
 <section id="home" class="page active">
 
   <div class="card">
-
     <div class="home-date">
-
       <div id="homeDate"></div>
-
       <div id="homeWeek"></div>
-
       <div class="greeting">
         今日も音楽と一緒に過ごそう 🍏
       </div>
-
     </div>
-
   </div>
 
-
   <div class="card hero">
-
     <div class="hero-label">
       🍏 TODAY'S MRS. GREEN APPLE
     </div>
@@ -522,12 +535,9 @@ footer{
     <button id="randomSong">
       ♻️ もう一度ランダム
     </button>
-
   </div>
 
-
   <div class="card">
-
     <div class="title">
       🌿 Today's Mood
     </div>
@@ -535,12 +545,9 @@ footer{
     <div class="info" id="homeMood">
       今日のMoodを選んでね 🍏
     </div>
-
   </div>
 
-
   <div class="card">
-
     <div class="title">
       ⏰ Today's Schedule
     </div>
@@ -548,12 +555,9 @@ footer{
     <div id="homeSchedule" class="info">
       予定はまだないよ ♡
     </div>
-
   </div>
 
-
   <div class="card">
-
     <div class="title">
       ☑ Todo
     </div>
@@ -563,19 +567,11 @@ footer{
     </div>
 
     <div class="progress">
-
-      <div
-        id="homeProgress"
-        class="progress-bar">
-      </div>
-
+      <div id="homeProgress" class="progress-bar"></div>
     </div>
-
   </div>
 
-
   <div class="card">
-
     <div class="title">
       📖 Today's Diary
     </div>
@@ -583,58 +579,30 @@ footer{
     <div id="homeDiary" class="info">
       今日はどんな1日だった？ 🍏
     </div>
-
   </div>
 
-
   <div class="card">
-
-    <button
-      class="green-button"
-      onclick="showPage('music')">
-
+    <button class="green-button" onclick="showPage('music')">
       🎧 MUSICをひらく
-
     </button>
-
   </div>
 
 </section>
 
-
-<!-- =========================
-     CALENDAR
-========================= -->
 
 <section id="calendar" class="page">
 
   <div class="card">
 
     <div class="calendar-head">
-
-      <button
-        class="month-btn"
-        id="prev">
-
-        ‹
-
-      </button>
+      <button class="month-btn" id="prev">‹</button>
 
       <h2 id="month"></h2>
 
-      <button
-        class="month-btn"
-        id="next">
-
-        ›
-
-      </button>
-
+      <button class="month-btn" id="next">›</button>
     </div>
 
-
     <div class="week">
-
       <div>日</div>
       <div>月</div>
       <div>火</div>
@@ -642,23 +610,17 @@ footer{
       <div>木</div>
       <div>金</div>
       <div>土</div>
-
     </div>
-
 
     <div id="days" class="days"></div>
 
   </div>
 
-
   <div class="card">
-
     <div class="title">
       🍏 <span id="selectedDate"></span>
     </div>
-
   </div>
-
 
   <div class="card">
 
@@ -668,10 +630,7 @@ footer{
 
     <div id="schedule"></div>
 
-
-    <form
-      id="scheduleForm"
-      class="form">
+    <form id="scheduleForm" class="form">
 
       <input
         id="scheduleTime"
@@ -686,14 +645,11 @@ footer{
         required
       >
 
-      <button type="submit">
-        ＋
-      </button>
+      <button type="submit">＋</button>
 
     </form>
 
   </div>
-
 
   <div class="card">
 
@@ -703,10 +659,7 @@ footer{
 
     <div id="todos"></div>
 
-
-    <form
-      id="todoForm"
-      class="form">
+    <form id="todoForm" class="form">
 
       <input
         id="todoText"
@@ -715,14 +668,11 @@ footer{
         required
       >
 
-      <button type="submit">
-        ＋
-      </button>
+      <button type="submit">＋</button>
 
     </form>
 
   </div>
-
 
   <div class="card">
 
@@ -730,89 +680,42 @@ footer{
       🌿 Mood
     </div>
 
+    <div class="mood-grid" id="moods">
 
-    <div
-      class="mood-grid"
-      id="moods">
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="☽ ໋꙳">
-
+      <button type="button" class="mood" data-mood="☽ ໋꙳">
         ☽ ໋꙳
-
       </button>
 
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="♡">
-
+      <button type="button" class="mood" data-mood="♡">
         ♡
-
       </button>
 
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="🍏">
-
+      <button type="button" class="mood" data-mood="🍏">
         🍏
-
       </button>
 
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="✨">
-
+      <button type="button" class="mood" data-mood="✨">
         ✨
-
       </button>
 
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="🌿">
-
+      <button type="button" class="mood" data-mood="🌿">
         🌿
-
       </button>
 
-
-      <button
-        type="button"
-        class="mood"
-        data-mood="☁️">
-
+      <button type="button" class="mood" data-mood="☁️">
         ☁️
-
       </button>
 
     </div>
 
-
-    <div
-      class="info"
-      id="selectedMood">
-
+    <div class="info" id="selectedMood">
       今日のMoodを選んでね 🍏
-
     </div>
 
   </div>
 
 </section>
 
-
-<!-- =========================
-     MUSIC
-========================= -->
 
 <section id="music" class="page">
 
@@ -822,25 +725,15 @@ footer{
       🎧 TODAY'S SONG
     </div>
 
-    <div
-      class="hero-song"
-      id="musicRecommend">
-
+    <div class="hero-song" id="musicRecommend">
       ---
-
     </div>
 
-
-    <button
-      type="button"
-      onclick="chooseSong()">
-
+    <button type="button" onclick="chooseSong()">
       ♻️ ランダムに選ぶ
-
     </button>
 
   </div>
-
 
   <div class="card">
 
@@ -850,10 +743,7 @@ footer{
 
     <div id="musicList"></div>
 
-
-    <form
-      id="musicForm"
-      class="form">
+    <form id="musicForm" class="form">
 
       <input
         id="musicText"
@@ -862,14 +752,11 @@ footer{
         required
       >
 
-      <button type="submit">
-        ＋
-      </button>
+      <button type="submit">＋</button>
 
     </form>
 
   </div>
-
 
   <div class="card">
 
@@ -884,10 +771,6 @@ footer{
 </section>
 
 
-<!-- =========================
-     DIARY
-========================= -->
-
 <section id="diary" class="page">
 
   <div class="card">
@@ -896,56 +779,40 @@ footer{
       📖 <span id="diaryDate"></span>
     </div>
 
-
     <textarea
       id="diaryText"
-      placeholder="今日あったこと、嬉しかったこと、音楽のこと……自由に書いてね 🍏">
-    </textarea>
-
+      placeholder="今日あったこと、嬉しかったこと、音楽のこと……自由に書いてね 🍏"
+    ></textarea>
 
     <div
       id="diarySaveStatus"
       class="info"
-      style="margin-top:10px;">
-
+      style="margin-top:10px;"
+    >
       🍏 ここに書いた内容は自動保存されます
-
     </div>
 
-
     <br>
-
 
     <div class="title">
       🌿 Mood
     </div>
 
-    <div
-      id="diaryMood"
-      class="info">
-    </div>
-
+    <div id="diaryMood" class="info"></div>
 
     <br>
-
 
     <div class="title">
       🎧 今日の曲
     </div>
 
-    <div
-      id="diaryMusic"
-      class="info">
-    </div>
-
+    <div id="diaryMusic" class="info"></div>
 
     <br>
-
 
     <div class="title">
       📷 Photo
     </div>
-
 
     <input
       type="file"
@@ -953,17 +820,14 @@ footer{
       accept="image/*"
     >
 
-
     <div
       id="photoBox"
-      class="photo-box">
-
+      class="photo-box"
+    >
       写真を入れられるよ 🍏
-
     </div>
 
   </div>
-
 
   <div class="card">
 
@@ -978,10 +842,6 @@ footer{
 </section>
 
 
-<!-- =========================
-     MY PAGE
-========================= -->
-
 <section id="mypage" class="page">
 
   <div class="card">
@@ -990,44 +850,36 @@ footer{
       🍏 My Profile
     </div>
 
-
     <input
       id="profileName"
       placeholder="名前・ニックネーム"
     >
 
-
     <br><br>
-
 
     <input
       id="favoriteColor"
       placeholder="好きな色"
     >
 
-
     <br><br>
-
 
     <textarea
       id="favoriteThings"
-      placeholder="好きなもの・好きな言葉など">
-    </textarea>
-
+      placeholder="好きなもの・好きな言葉など"
+    ></textarea>
 
     <br><br>
 
-
     <button
+      type="button"
       class="green-button"
-      id="saveProfile">
-
+      id="saveProfile"
+    >
       保存する 🍏
-
     </button>
 
   </div>
-
 
   <div class="card">
 
@@ -1042,42 +894,32 @@ footer{
 </section>
 
 
-<!-- =========================
-     GROW
-========================= -->
-
 <section id="grow" class="page">
 
   <div class="card grow-stage">
 
     <div
       class="stage-icon"
-      id="stageIcon">
-
+      id="stageIcon"
+    >
       🌱
-
     </div>
-
 
     <div
       class="stage-name"
-      id="stageName">
-
+      id="stageName"
+    >
       Seed
-
     </div>
-
 
     <div
       class="points"
-      id="points">
-
+      id="points"
+    >
       0 points
-
     </div>
 
   </div>
-
 
   <div class="card">
 
@@ -1087,11 +929,10 @@ footer{
 
     <div
       id="growthInfo"
-      class="info">
-    </div>
+      class="info"
+    ></div>
 
   </div>
-
 
   <div class="card">
 
@@ -1100,21 +941,15 @@ footer{
     </div>
 
     <div class="info">
-
       🌱 Seed
       <br>↓<br>
-
       🌿 Sprout
       <br>↓<br>
-
       🍀 Clover
       <br>↓<br>
-
       🌳 Tree
       <br>↓<br>
-
       🍏 Apple
-
     </div>
 
   </div>
@@ -1122,7 +957,6 @@ footer{
 </section>
 
 </main>
-
 
 <footer>
   Apple Days 🍏 music · diary · little days
@@ -1135,7 +969,7 @@ footer{
    曲リスト
 ========================================= */
 
-const songs = [
+const songs=[
   "青と夏",
   "ケセラセラ",
   "ダンスホール",
@@ -1154,8 +988,7 @@ const songs = [
   "familie"
 ];
 
-
-const notes = [
+const notes=[
   "今日はこの曲と一緒に過ごそう 🍏",
   "ちょっと元気をもらいたい日に。",
   "今日の気分にそっと寄り添う1曲。",
@@ -1168,14 +1001,9 @@ const notes = [
    日付
 ========================================= */
 
-let currentDate = new Date();
+let currentDate=new Date();
+let selectedDate=new Date();
 
-let selectedDate = new Date();
-
-
-/*
-  ★ここを修正済み★
-*/
 
 function key(date){
 
@@ -1197,10 +1025,10 @@ function data(k){
   try{
 
     return JSON.parse(
-      localStorage.getItem(k) || "[]"
+      localStorage.getItem(k)||"[]"
     );
 
-  }catch(error){
+  }catch{
 
     return [];
 
@@ -1229,21 +1057,19 @@ function showPage(id){
 
     page.classList.toggle(
       "active",
-      page.id === id
+      page.id===id
     );
 
   });
-
 
   document.querySelectorAll(".tab").forEach(tab=>{
 
     tab.classList.toggle(
       "active",
-      tab.dataset.page === id
+      tab.dataset.page===id
     );
 
   });
-
 
   renderAll();
 
@@ -1263,7 +1089,7 @@ document.querySelectorAll(".tab").forEach(tab=>{
 
 
 /* =========================================
-   今日のキー
+   今日の日付キー
 ========================================= */
 
 function todayKey(){
@@ -1274,33 +1100,30 @@ function todayKey(){
 
 
 /* =========================================
-   今日の曲
+   今日のミセス曲
 ========================================= */
 
-function songKey(date = new Date()){
+function songKey(date=new Date()){
 
-  return "today-song-" + key(date);
+  return "today-song-"+key(date);
 
 }
 
 
-function getDailySong(date = new Date()){
+function getDailySong(date=new Date()){
 
-  const storageKey = songKey(date);
+  const storageKey=songKey(date);
 
-  let song =
-    localStorage.getItem(storageKey);
-
+  let song=localStorage.getItem(storageKey);
 
   if(!song){
 
-    song =
+    song=
       songs[
         Math.floor(
-          Math.random() * songs.length
+          Math.random()*songs.length
         )
       ];
-
 
     localStorage.setItem(
       storageKey,
@@ -1309,7 +1132,6 @@ function getDailySong(date = new Date()){
 
   }
 
-
   return song;
 
 }
@@ -1317,27 +1139,22 @@ function getDailySong(date = new Date()){
 
 function chooseSong(){
 
-  const date = new Date();
+  const date=new Date();
 
-  const storageKey =
-    songKey(date);
+  const storageKey=songKey(date);
 
+  let current=getDailySong(date);
 
-  const current =
-    getDailySong(date);
+  let newSong=current;
 
+  if(songs.length>1){
 
-  let newSong = current;
+    while(newSong===current){
 
-
-  if(songs.length > 1){
-
-    while(newSong === current){
-
-      newSong =
+      newSong=
         songs[
           Math.floor(
-            Math.random() * songs.length
+            Math.random()*songs.length
           )
         ];
 
@@ -1345,19 +1162,14 @@ function chooseSong(){
 
   }
 
-
   localStorage.setItem(
     storageKey,
     newSong
   );
 
-
   renderDailySong();
-
   renderMusic();
-
   renderDiary();
-
   renderHome();
 
 }
@@ -1365,37 +1177,30 @@ function chooseSong(){
 
 function renderDailySong(){
 
-  const song =
-    getDailySong();
-
+  const song=getDailySong();
 
   document.getElementById(
     "recommendSong"
-  ).textContent = song;
-
+  ).textContent=song;
 
   document.getElementById(
     "musicRecommend"
-  ).textContent = song;
+  ).textContent=song;
 
+  const noteKey=
+    "today-song-note-"+todayKey();
 
-  const noteKey =
-    "today-song-note-" + todayKey();
-
-
-  let note =
+  let note=
     localStorage.getItem(noteKey);
-
 
   if(!note){
 
-    note =
+    note=
       notes[
         Math.floor(
-          Math.random() * notes.length
+          Math.random()*notes.length
         )
       ];
-
 
     localStorage.setItem(
       noteKey,
@@ -1404,87 +1209,81 @@ function renderDailySong(){
 
   }
 
-
   document.getElementById(
     "recommendNote"
-  ).textContent = note;
+  ).textContent=note;
 
 }
 
 
 document.getElementById(
   "randomSong"
-).onclick = chooseSong;
+).onclick=chooseSong;
 
 
 /* =========================================
-   HOME
+   Home
 ========================================= */
 
 function renderHome(){
 
-  const today = new Date();
-
-  const k = key(today);
-
+  const today=new Date();
+  const k=key(today);
 
   document.getElementById(
     "homeDate"
-  ).textContent =
+  ).textContent=
     `${today.getMonth()+1}月${today.getDate()}日`;
-
 
   document.getElementById(
     "homeWeek"
-  ).textContent =
+  ).textContent=
     ["日","月","火","水","木","金","土"][
       today.getDay()
-    ] + "曜日";
+    ]+"曜日";
 
 
-  const mood =
+  const mood=
     localStorage.getItem(
-      "mood-" + k
+      "mood-"+k
     );
 
 
   document.getElementById(
     "homeMood"
-  ).textContent =
+  ).textContent=
     mood
       ? `今日のMood ${mood}`
       : "今日のMoodを選んでね 🍏";
 
 
-  let schedules =
-    data("schedule-" + k);
-
+  let schedules=
+    data("schedule-"+k);
 
   schedules.sort((a,b)=>
-    (a.time || "").localeCompare(
-      b.time || ""
+    (a.time||"").localeCompare(
+      b.time||""
     )
   );
 
 
-  const now = new Date();
+  const now=new Date();
 
-
-  const time =
+  const time=
     String(now.getHours()).padStart(2,"0")
-    + ":"
-    + String(now.getMinutes()).padStart(2,"0");
+    +":"
+    +String(now.getMinutes()).padStart(2,"0");
 
 
-  const next =
+  const next=
     schedules.find(
-      x => x.time >= time
+      x=>x.time>=time
     );
 
 
   document.getElementById(
     "homeSchedule"
-  ).textContent =
+  ).textContent=
     next
       ? `${next.time}　${next.text}`
       : schedules.length
@@ -1492,39 +1291,37 @@ function renderHome(){
         : "予定はまだないよ ♡";
 
 
-  const todos =
-    data("todo-" + k);
+  const todos=data("todo-"+k);
 
-
-  const done =
+  const done=
     todos.filter(
-      x => x.done
+      x=>x.done
     ).length;
 
 
   document.getElementById(
     "homeTodo"
-  ).textContent =
+  ).textContent=
     `${done} / ${todos.length}`;
 
 
   document.getElementById(
     "homeProgress"
-  ).style.width =
+  ).style.width=
     `${todos.length
-      ? done / todos.length * 100
+      ? done/todos.length*100
       : 0}%`;
 
 
-  const diary =
+  const diary=
     localStorage.getItem(
-      "diary-" + k
-    ) || "";
+      "diary-"+k
+    )||"";
 
 
   document.getElementById(
     "homeDiary"
-  ).textContent =
+  ).textContent=
     diary
       ? diary
       : "今日はどんな1日だった？ 🍏";
@@ -1533,33 +1330,31 @@ function renderHome(){
 
 
 /* =========================================
-   CALENDAR
+   Calendar
 ========================================= */
 
 function renderCalendar(){
 
-  const year =
+  const year=
     currentDate.getFullYear();
 
-
-  const month =
+  const month=
     currentDate.getMonth();
 
 
   document.getElementById(
     "month"
-  ).textContent =
+  ).textContent=
     `${year}年 ${month+1}月`;
 
 
-  const days =
+  const days=
     document.getElementById("days");
 
+  days.innerHTML="";
 
-  days.innerHTML = "";
 
-
-  const first =
+  const first=
     new Date(
       year,
       month,
@@ -1567,15 +1362,15 @@ function renderCalendar(){
     ).getDay();
 
 
-  const last =
+  const last=
     new Date(
       year,
-      month + 1,
+      month+1,
       0
     ).getDate();
 
 
-  for(let i=0; i<first; i++){
+  for(let i=0;i<first;i++){
 
     days.appendChild(
       document.createElement("div")
@@ -1584,75 +1379,83 @@ function renderCalendar(){
   }
 
 
-  for(let d=1; d<=last; d++){
+  for(
+    let d=1;
+    d<=last;
+    d++
+  ){
 
-    const date =
+    const date=
       new Date(
         year,
         month,
         d
       );
 
+    const k=key(date);
 
-    const k = key(date);
 
-
-    const cell =
+    const cell=
       document.createElement("div");
 
-
-    cell.className = "day";
+    cell.className="day";
 
 
     if(
-      k === key(new Date())
+      k===key(new Date())
     ){
 
-      cell.classList.add("today");
+      cell.classList.add(
+        "today"
+      );
 
     }
 
 
     if(
-      k === key(selectedDate)
+      k===key(selectedDate)
     ){
 
-      cell.classList.add("selected");
+      cell.classList.add(
+        "selected"
+      );
 
     }
 
 
-    cell.innerHTML =
+    cell.innerHTML=
       `<div>${d}</div>`;
 
 
     if(
-      data("schedule-" + k).length
+      data(
+        "schedule-"+k
+      ).length
     ){
 
-      cell.innerHTML +=
+      cell.innerHTML+=
         `<div class="day-mark">⏰</div>`;
 
     }
 
 
-    const mood =
+    const mood=
       localStorage.getItem(
-        "mood-" + k
+        "mood-"+k
       );
 
 
     if(mood){
 
-      cell.innerHTML +=
+      cell.innerHTML+=
         `<div class="day-mark">${escapeHTML(mood)}</div>`;
 
     }
 
 
-    const diary =
+    const diary=
       localStorage.getItem(
-        "diary-" + k
+        "diary-"+k
       );
 
 
@@ -1661,29 +1464,30 @@ function renderCalendar(){
       diary.trim()
     ){
 
-      cell.innerHTML +=
+      cell.innerHTML+=
         `<div class="day-mark">📖</div>`;
 
     }
 
 
-    const music =
-      data("music-" + k);
+    const music=
+      data(
+        "music-"+k
+      );
 
 
     if(music.length){
 
-      cell.innerHTML +=
+      cell.innerHTML+=
         `<div class="day-mark">🎧</div>`;
 
     }
 
 
-    cell.onclick = ()=>{
+    cell.onclick=()=>{
 
-      selectedDate =
+      selectedDate=
         new Date(date);
-
 
       renderAll();
 
@@ -1697,7 +1501,7 @@ function renderCalendar(){
 
   document.getElementById(
     "selectedDate"
-  ).textContent =
+  ).textContent=
     `${selectedDate.getFullYear()}年${
       selectedDate.getMonth()+1
     }月${
@@ -1709,15 +1513,11 @@ function renderCalendar(){
 
 document.getElementById(
   "prev"
-).onclick = ()=>{
+).onclick=()=>{
 
-  currentDate =
-    new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - 1,
-      1
-    );
-
+  currentDate.setMonth(
+    currentDate.getMonth()-1
+  );
 
   renderCalendar();
 
@@ -1726,15 +1526,11 @@ document.getElementById(
 
 document.getElementById(
   "next"
-).onclick = ()=>{
+).onclick=()=>{
 
-  currentDate =
-    new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      1
-    );
-
+  currentDate.setMonth(
+    currentDate.getMonth()+1
+  );
 
   renderCalendar();
 
@@ -1742,31 +1538,27 @@ document.getElementById(
 
 
 /* =========================================
-   SCHEDULE
+   Schedule
 ========================================= */
 
 function renderSchedule(){
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
-
-  const el =
+  const el=
     document.getElementById(
       "schedule"
     );
 
+  const list=
+    data("schedule-"+k);
 
-  const list =
-    data("schedule-" + k);
-
-
-  el.innerHTML = "";
+  el.innerHTML="";
 
 
   if(!list.length){
 
-    el.innerHTML =
+    el.innerHTML=
       '<div class="info">予定はまだないよ ♡</div>';
 
     return;
@@ -1776,50 +1568,39 @@ function renderSchedule(){
 
   list.sort(
     (a,b)=>
-      (a.time || "").localeCompare(
-        b.time || ""
+      (a.time||"").localeCompare(
+        b.time||""
       )
   );
 
 
   list.forEach((x,i)=>{
 
-    const div =
+    const div=
       document.createElement("div");
 
+    div.className="item";
 
-    div.className = "item";
 
-
-    div.innerHTML = `
+    div.innerHTML=`
       <span>⏰ ${escapeHTML(x.time)}</span>
-
       <span class="grow">
         ${escapeHTML(x.text)}
       </span>
-
-      <button
-        type="button"
-        class="delete">
-
-        ×
-
-      </button>
+      <button type="button" class="delete">×</button>
     `;
 
 
     div.querySelector(
       ".delete"
-    ).onclick = ()=>{
+    ).onclick=()=>{
 
       list.splice(i,1);
 
-
       save(
-        "schedule-" + k,
+        "schedule-"+k,
         list
       );
-
 
       renderAll();
 
@@ -1835,17 +1616,15 @@ function renderSchedule(){
 
 document.getElementById(
   "scheduleForm"
-).onsubmit = e => {
+).onsubmit=e=>{
 
   e.preventDefault();
 
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
-
-  const list =
-    data("schedule-" + k);
+  const list=
+    data("schedule-"+k);
 
 
   list.push({
@@ -1864,13 +1643,12 @@ document.getElementById(
 
 
   save(
-    "schedule-" + k,
+    "schedule-"+k,
     list
   );
 
 
   e.target.reset();
-
 
   renderAll();
 
@@ -1878,31 +1656,28 @@ document.getElementById(
 
 
 /* =========================================
-   TODO
+   Todo
 ========================================= */
 
 function renderTodos(){
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
-
-  const el =
+  const el=
     document.getElementById(
       "todos"
     );
 
+  const list=
+    data("todo-"+k);
 
-  const list =
-    data("todo-" + k);
 
-
-  el.innerHTML = "";
+  el.innerHTML="";
 
 
   if(!list.length){
 
-    el.innerHTML =
+    el.innerHTML=
       '<div class="info">Todoはまだないよ ♡</div>';
 
     return;
@@ -1912,17 +1687,16 @@ function renderTodos(){
 
   list.forEach((x,i)=>{
 
-    const div =
+    const div=
       document.createElement("div");
 
+    div.className="item";
 
-    div.className = "item";
 
-
-    div.innerHTML = `
+    div.innerHTML=`
       <input
         type="checkbox"
-        ${x.done ? "checked" : ""}
+        ${x.done?"checked":""}
       >
 
       <span class="grow">
@@ -1931,27 +1705,23 @@ function renderTodos(){
 
       <button
         type="button"
-        class="delete">
-
+        class="delete"
+      >
         ×
-
       </button>
     `;
 
 
     div.querySelector(
       "input"
-    ).onchange = ()=>{
+    ).onchange=()=>{
 
-      x.done =
-        !x.done;
-
+      x.done=!x.done;
 
       save(
-        "todo-" + k,
+        "todo-"+k,
         list
       );
-
 
       renderAll();
 
@@ -1960,16 +1730,14 @@ function renderTodos(){
 
     div.querySelector(
       ".delete"
-    ).onclick = ()=>{
+    ).onclick=()=>{
 
       list.splice(i,1);
 
-
       save(
-        "todo-" + k,
+        "todo-"+k,
         list
       );
-
 
       renderAll();
 
@@ -1985,17 +1753,15 @@ function renderTodos(){
 
 document.getElementById(
   "todoForm"
-).onsubmit = e => {
+).onsubmit=e=>{
 
   e.preventDefault();
 
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
-
-  const list =
-    data("todo-" + k);
+  const list=
+    data("todo-"+k);
 
 
   list.push({
@@ -2011,13 +1777,12 @@ document.getElementById(
 
 
   save(
-    "todo-" + k,
+    "todo-"+k,
     list
   );
 
 
   e.target.reset();
-
 
   renderAll();
 
@@ -2025,21 +1790,20 @@ document.getElementById(
 
 
 /* =========================================
-   MOOD
+   Mood
 ========================================= */
 
 document.querySelectorAll(
   ".mood"
 ).forEach(button=>{
 
-  button.onclick = ()=>{
+  button.onclick=()=>{
 
-    const k =
-      key(selectedDate);
+    const k=key(selectedDate);
 
 
     localStorage.setItem(
-      "mood-" + k,
+      "mood-"+k,
       button.dataset.mood
     );
 
@@ -2053,14 +1817,12 @@ document.querySelectorAll(
 
 function renderMood(){
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
-
-  const mood =
+  const mood=
     localStorage.getItem(
-      "mood-" + k
-    ) || "";
+      "mood-"+k
+    )||"";
 
 
   document.querySelectorAll(
@@ -2069,7 +1831,7 @@ function renderMood(){
 
     button.classList.toggle(
       "active",
-      button.dataset.mood === mood
+      button.dataset.mood===mood
     );
 
   });
@@ -2077,7 +1839,7 @@ function renderMood(){
 
   document.getElementById(
     "selectedMood"
-  ).textContent =
+  ).textContent=
     mood
       ? `今日のMood　${mood}`
       : "今日のMoodを選んでね 🍏";
@@ -2085,7 +1847,7 @@ function renderMood(){
 
   document.getElementById(
     "diaryMood"
-  ).textContent =
+  ).textContent=
     mood
       ? mood
       : "まだMoodを選んでいないよ 🍏";
@@ -2094,18 +1856,17 @@ function renderMood(){
 
 
 /* =========================================
-   DIARY
+   Diary
 ========================================= */
 
 function renderDiary(){
 
-  const k =
-    key(selectedDate);
+  const k=key(selectedDate);
 
 
   document.getElementById(
     "diaryDate"
-  ).textContent =
+  ).textContent=
     `${selectedDate.getFullYear()}年${
       selectedDate.getMonth()+1
     }月${
@@ -2113,46 +1874,46 @@ function renderDiary(){
     }日`;
 
 
-  const diary =
+  const diary=
     localStorage.getItem(
-      "diary-" + k
-    ) || "";
+      "diary-"+k
+    )||"";
 
 
   document.getElementById(
     "diaryText"
-  ).value = diary;
+  ).value=diary;
 
 
   document.getElementById(
     "diarySaveStatus"
-  ).textContent =
+  ).textContent=
     diary
       ? "🍏 この日の日記は保存されています"
       : "🍏 ここに書いた内容は自動保存されます";
 
 
-  const music =
-    data("music-" + k);
+  const music=
+    data("music-"+k);
 
 
   document.getElementById(
     "diaryMusic"
-  ).textContent =
+  ).textContent=
     music.length
-      ? music.map(
-          x => x.name
-        ).join(" / ")
+      ? music
+          .map(x=>x.name)
+          .join(" / ")
       : "まだ曲を記録していないよ 🎧";
 
 
-  const photo =
+  const photo=
     localStorage.getItem(
-      "photo-" + k
+      "photo-"+k
     );
 
 
-  const box =
+  const box=
     document.getElementById(
       "photoBox"
     );
@@ -2160,21 +1921,20 @@ function renderDiary(){
 
   if(photo){
 
-    box.innerHTML = "";
+    box.innerHTML="";
 
-
-    const img =
+    const img=
       document.createElement("img");
 
+    img.src=photo;
 
-    img.src = photo;
-
+    img.alt="Diary photo";
 
     box.appendChild(img);
 
   }else{
 
-    box.textContent =
+    box.textContent=
       "写真を入れられるよ 🍏";
 
   }
@@ -2184,63 +1944,72 @@ function renderDiary(){
 
 document.getElementById(
   "diaryText"
-).oninput = e => {
+).oninput=e=>{
 
-  const k =
+  const k=
     key(selectedDate);
+
+  const text=
+    e.target.value;
 
 
   localStorage.setItem(
-    "diary-" + k,
-    e.target.value
+    "diary-"+k,
+    text
   );
 
 
   document.getElementById(
     "diarySaveStatus"
-  ).textContent =
+  ).textContent=
     "✓ 自動保存済み 🍏";
 
 
   updateGrow();
-
   renderHome();
-
   renderCalendar();
-
   renderArchive();
 
 };
 
 
 /* =========================================
-   PHOTO
+   Diary Photo
 ========================================= */
 
 document.getElementById(
   "photoInput"
-).onchange = e => {
+).onchange=e=>{
 
-  const file =
+  const file=
     e.target.files[0];
 
 
   if(!file)return;
 
 
-  const reader =
+  const reader=
     new FileReader();
 
 
-  reader.onload = ()=>{
+  reader.onload=()=>{
 
-    localStorage.setItem(
-      "photo-" + key(selectedDate),
-      reader.result
-    );
+    try{
 
+      localStorage.setItem(
+        "photo-"+key(selectedDate),
+        reader.result
+      );
 
-    renderDiary();
+      renderDiary();
+
+    }catch(error){
+
+      alert(
+        "写真が大きすぎて保存できないみたい🥲\nもう少し小さい写真を選んでみてね。"
+      );
+
+    }
 
   };
 
@@ -2251,21 +2020,20 @@ document.getElementById(
 
 
 /* =========================================
-   DIARY ARCHIVE
+   Diary Archive
 ========================================= */
 
 function renderArchive(){
 
-  const el =
+  const el=
     document.getElementById(
       "archive"
     );
 
+  el.innerHTML="";
 
-  el.innerHTML = "";
 
-
-  const entries = [];
+  const entries=[];
 
 
   for(
@@ -2274,7 +2042,7 @@ function renderArchive(){
     i++
   ){
 
-    const k =
+    const k=
       localStorage.key(i);
 
 
@@ -2283,7 +2051,7 @@ function renderArchive(){
       k.startsWith("diary-")
     ){
 
-      const text =
+      const text=
         localStorage.getItem(k);
 
 
@@ -2321,7 +2089,7 @@ function renderArchive(){
 
   if(!entries.length){
 
-    el.innerHTML =
+    el.innerHTML=
       '<div class="info">まだ日記がないよ 🍏</div>';
 
     return;
@@ -2331,24 +2099,22 @@ function renderArchive(){
 
   entries.forEach(x=>{
 
-    const mood =
+    const mood=
       localStorage.getItem(
-        "mood-" + x.date
-      ) || "";
+        "mood-"+x.date
+      )||"";
 
 
-    const div =
+    const div=
       document.createElement("div");
 
+    div.className="item";
 
-    div.className = "item";
 
-
-    div.innerHTML = `
+    div.innerHTML=`
       <span>📖</span>
 
       <span class="grow">
-
         <strong>
           ${escapeHTML(x.date)} ${escapeHTML(mood)}
         </strong>
@@ -2356,27 +2122,28 @@ function renderArchive(){
         <br>
 
         ${escapeHTML(x.text)}
-
       </span>
     `;
 
 
-    div.onclick = ()=>{
+    div.onclick=()=>{
 
-      const parts =
+      const parts=
         x.date.split("-");
 
 
-      selectedDate =
+      selectedDate=
         new Date(
           +parts[0],
-          +parts[1] - 1,
+          +parts[1]-1,
           +parts[2]
         );
 
 
-      currentDate =
-        new Date(selectedDate);
+      currentDate=
+        new Date(
+          selectedDate
+        );
 
 
       showPage("diary");
@@ -2392,31 +2159,31 @@ function renderArchive(){
 
 
 /* =========================================
-   MUSIC
+   Music
 ========================================= */
 
 function renderMusic(){
 
-  const k =
+  const k=
     key(selectedDate);
 
 
-  const list =
-    data("music-" + k);
+  const list=
+    data("music-"+k);
 
 
-  const el =
+  const el=
     document.getElementById(
       "musicList"
     );
 
 
-  el.innerHTML = "";
+  el.innerHTML="";
 
 
   if(!list.length){
 
-    el.innerHTML =
+    el.innerHTML=
       '<div class="info">まだ曲を記録していないよ 🎧</div>';
 
   }
@@ -2424,14 +2191,14 @@ function renderMusic(){
 
   list.forEach((x,i)=>{
 
-    const div =
+    const div=
       document.createElement("div");
 
 
-    div.className = "item";
+    div.className="item";
 
 
-    div.innerHTML = `
+    div.innerHTML=`
       <span>🎧</span>
 
       <span class="grow">
@@ -2440,55 +2207,48 @@ function renderMusic(){
 
       <button
         type="button"
-        class="delete">
-
-        ${x.favorite ? "★" : "☆"}
-
+        class="delete"
+      >
+        ${x.favorite?"★":"☆"}
       </button>
 
       <button
         type="button"
-        class="delete">
-
+        class="delete"
+      >
         ×
-
       </button>
     `;
 
 
-    const buttons =
+    const buttons=
       div.querySelectorAll(
         "button"
       );
 
 
-    buttons[0].onclick = ()=>{
+    buttons[0].onclick=()=>{
 
-      x.favorite =
-        !x.favorite;
-
+      x.favorite=!x.favorite;
 
       save(
-        "music-" + k,
+        "music-"+k,
         list
       );
-
 
       renderAll();
 
     };
 
 
-    buttons[1].onclick = ()=>{
+    buttons[1].onclick=()=>{
 
       list.splice(i,1);
 
-
       save(
-        "music-" + k,
+        "music-"+k,
         list
       );
-
 
       renderAll();
 
@@ -2502,7 +2262,7 @@ function renderMusic(){
 
   document.getElementById(
     "musicRecommend"
-  ).textContent =
+  ).textContent=
     getDailySong();
 
 }
@@ -2510,17 +2270,17 @@ function renderMusic(){
 
 document.getElementById(
   "musicForm"
-).onsubmit = e => {
+).onsubmit=e=>{
 
   e.preventDefault();
 
 
-  const k =
+  const k=
     key(selectedDate);
 
 
-  const list =
-    data("music-" + k);
+  const list=
+    data("music-"+k);
 
 
   list.push({
@@ -2536,7 +2296,7 @@ document.getElementById(
 
 
   save(
-    "music-" + k,
+    "music-"+k,
     list
   );
 
@@ -2552,21 +2312,21 @@ document.getElementById(
 
 
 /* =========================================
-   FAVORITES
+   Favorites
 ========================================= */
 
 function renderFavorites(){
 
-  const el =
+  const el=
     document.getElementById(
       "favoriteList"
     );
 
 
-  el.innerHTML = "";
+  el.innerHTML="";
 
 
-  const all = [];
+  const all=[];
 
 
   for(
@@ -2575,7 +2335,7 @@ function renderFavorites(){
     i++
   ){
 
-    const k =
+    const k=
       localStorage.key(i);
 
 
@@ -2588,7 +2348,9 @@ function renderFavorites(){
 
         if(x.favorite){
 
-          all.push(x.name);
+          all.push(
+            x.name
+          );
 
         }
 
@@ -2601,7 +2363,7 @@ function renderFavorites(){
 
   if(!all.length){
 
-    el.innerHTML =
+    el.innerHTML=
       '<div class="info">お気に入り曲はまだないよ 🍏</div>';
 
     return;
@@ -2613,17 +2375,16 @@ function renderFavorites(){
     ...new Set(all)
   ].forEach(x=>{
 
-    const div =
+    const div=
       document.createElement("div");
 
 
-    div.className = "item";
+    div.className="item";
 
 
-    div.innerHTML = `
+    div.innerHTML=`
       <span>★</span>
-
-      <span>
+      <span class="grow">
         ${escapeHTML(x)}
       </span>
     `;
@@ -2637,45 +2398,45 @@ function renderFavorites(){
 
 
 /* =========================================
-   PROFILE
+   Profile
 ========================================= */
 
 function renderProfile(){
 
   document.getElementById(
     "profileName"
-  ).value =
+  ).value=
     localStorage.getItem(
       "profile-name"
-    ) || "";
+    )||"";
 
 
   document.getElementById(
     "favoriteColor"
-  ).value =
+  ).value=
     localStorage.getItem(
       "profile-color"
-    ) || "";
+    )||"";
 
 
   document.getElementById(
     "favoriteThings"
-  ).value =
+  ).value=
     localStorage.getItem(
       "profile-things"
-    ) || "";
+    )||"";
 
 
-  const el =
+  const el=
     document.getElementById(
       "mySongs"
     );
 
 
-  el.innerHTML = "";
+  el.innerHTML="";
 
 
-  const favorites = [];
+  const favorites=[];
 
 
   for(
@@ -2684,7 +2445,7 @@ function renderProfile(){
     i++
   ){
 
-    const k =
+    const k=
       localStorage.key(i);
 
 
@@ -2714,14 +2475,14 @@ function renderProfile(){
     ...new Set(favorites)
   ].forEach(x=>{
 
-    const div =
+    const div=
       document.createElement("div");
 
 
-    div.className = "item";
+    div.className="item";
 
 
-    div.innerHTML =
+    div.innerHTML=
       `🎧 ${escapeHTML(x)}`;
 
 
@@ -2734,7 +2495,7 @@ function renderProfile(){
 
 document.getElementById(
   "saveProfile"
-).onclick = ()=>{
+).onclick=()=>{
 
   localStorage.setItem(
     "profile-name",
@@ -2760,19 +2521,17 @@ document.getElementById(
   );
 
 
-  const button =
-    document.getElementById(
-      "saveProfile"
-    );
-
-
-  button.textContent =
+  document.getElementById(
+    "saveProfile"
+  ).textContent=
     "保存したよ 🍏";
 
 
   setTimeout(()=>{
 
-    button.textContent =
+    document.getElementById(
+      "saveProfile"
+    ).textContent=
       "保存する 🍏";
 
   },1500);
@@ -2781,12 +2540,12 @@ document.getElementById(
 
 
 /* =========================================
-   GROW
+   Grow
 ========================================= */
 
 function updateGrow(){
 
-  let points = 0;
+  let points=0;
 
 
   for(
@@ -2795,7 +2554,7 @@ function updateGrow(){
     i++
   ){
 
-    const k =
+    const k=
       localStorage.key(i);
 
 
@@ -2806,7 +2565,7 @@ function updateGrow(){
       k.startsWith("diary-")
     ){
 
-      const value =
+      const value=
         localStorage.getItem(k);
 
 
@@ -2815,7 +2574,7 @@ function updateGrow(){
         value.trim()
       ){
 
-        points += 2;
+        points+=2;
 
       }
 
@@ -2826,7 +2585,7 @@ function updateGrow(){
       k.startsWith("music-")
     ){
 
-      points +=
+      points+=
         data(k).length;
 
     }
@@ -2836,11 +2595,9 @@ function updateGrow(){
       k.startsWith("todo-")
     ){
 
-      points +=
+      points+=
         data(k)
-          .filter(
-            x => x.done
-          )
+          .filter(x=>x.done)
           .length;
 
     }
@@ -2850,7 +2607,7 @@ function updateGrow(){
       k.startsWith("schedule-")
     ){
 
-      points +=
+      points+=
         data(k).length;
 
     }
@@ -2858,66 +2615,61 @@ function updateGrow(){
   }
 
 
-  let icon = "🌱";
+  let icon="🌱";
+  let name="Seed";
 
-  let name = "Seed";
 
+  if(points>=10){
 
-  if(points >= 10){
-
-    icon = "🌿";
-
-    name = "Sprout";
+    icon="🌿";
+    name="Sprout";
 
   }
 
 
-  if(points >= 25){
+  if(points>=25){
 
-    icon = "🍀";
-
-    name = "Clover";
-
-  }
-
-
-  if(points >= 50){
-
-    icon = "🌳";
-
-    name = "Tree";
+    icon="🍀";
+    name="Clover";
 
   }
 
 
-  if(points >= 100){
+  if(points>=50){
 
-    icon = "🍏";
+    icon="🌳";
+    name="Tree";
 
-    name = "Apple";
+  }
+
+
+  if(points>=100){
+
+    icon="🍏";
+    name="Apple";
 
   }
 
 
   document.getElementById(
     "stageIcon"
-  ).textContent = icon;
+  ).textContent=icon;
 
 
   document.getElementById(
     "stageName"
-  ).textContent = name;
+  ).textContent=name;
 
 
   document.getElementById(
     "points"
-  ).textContent =
+  ).textContent=
     `${points} points`;
 
 
   document.getElementById(
     "growthInfo"
-  ).textContent =
+  ).textContent=
     `今までの記録で ${points} points 🌱`;
 
 }
