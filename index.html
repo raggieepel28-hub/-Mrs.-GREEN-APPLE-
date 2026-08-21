@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7da88a">
+<title>Apple Days 🍏</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,body,button,input,textarea,select{
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(151,190,157,.22),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(215,226,193,.35),transparent 25%),
+    linear-gradient(180deg,#fdfcf5 0%,#f4f8ee 55%,#eef5eb 100%);
+  color:#56665b;
+  font-size:14px;
+  line-height:1.7;
+  letter-spacing:.03em;
+}
+
+header{
+  text-align:center;
+  padding:25px 15px 12px;
+}
+
+.logo{
+  margin:0;
+  color:#668d70;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+
+.subtitle{
+  color:#9aaa99;
+  font-size:10px;
+  letter-spacing:.15em;
+}
+
+#tabs{
+  display:flex;
+  gap:6px;
+  padding:6px 10px 15px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+#tabs::-webkit-scrollbar{
+  display:none;
+}
+
+.tab{
+  flex:1;
+  min-width:72px;
+  border:1px solid #e1eadc;
+  border-radius:18px;
+  padding:9px 6px;
+  background:rgba(255,255,255,.88);
+  color:#77917c;
+  font-size:11px;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(93,124,99,.08);
+}
+
+.tab.active{
+  background:#7da88a;
+  color:white;
+  border-color:#7da88a;
+}
+
+main{
+  width:100%;
+  max-width:680px;
+  margin:auto;
+  padding:0 11px 35px;
+}
+
+.page{
+  display:none;
+  animation:fade .25s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.card{
+  margin-bottom:14px;
+  padding:18px;
+  background:rgba(255,255,255,.9);
+  border:1px solid #e0e9dc;
+  border-radius:23px;
+  box-shadow:0 7px 24px rgba(88,117,94,.08);
+}
+
+.title{
+  margin:0 0 13px;
+  color:#66886e;
+  font-size:15px;
+  font-weight:700;
+}
+
+.home-date{
+  text-align:center;
+}
+
+#homeDate{
+  color:#638b6d;
+  font-size:32px;
+  font-weight:700;
+}
+
+#homeWeek{
+  color:#9aac9a;
+  font-size:11px;
+}
+
+.greeting{
+  margin-top:4px;
+  color:#7f9582;
+  font-size:13px;
+}
+
+.hero{
+  padding:21px;
+  background:linear-gradient(135deg,#f0f7e9,#fffdf6);
+}
+
+.hero-label{
+  color:#829d78;
+  font-size:11px;
+  letter-spacing:.12em;
+}
+
+.hero-song{
+  margin:5px 0;
+  color:#54765d;
+  font-size:21px;
+  font-weight:700;
+}
+
+.hero-note{
+  color:#91a28f;
+  font-size:11px;
+}
+
+.hero button,
+.green-button{
+  width:100%;
+  border:0;
+  border-radius:18px;
+  padding:11px;
+  background:#7da88a;
+  color:#fff;
+  cursor:pointer;
+}
+
+.info{
+  padding:12px 14px;
+  border-radius:16px;
+  background:#f4f8ef;
+  color:#718675;
+}
+
+.progress{
+  height:9px;
+  overflow:hidden;
+  border-radius:20px;
+  background:#e5eee0;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  border-radius:20px;
+  background:#86aa8c;
+  transition:.3s;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid #dce8d9;
+  border-radius:14px;
+  background:#fcfdf9;
+  color:#56665b;
+  padding:10px;
+  outline:none;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:#91b19a;
+  box-shadow:0 0 0 3px rgba(125,168,138,.12);
+}
+
+.form{
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+}
+
+.form button{
+  width:42px;
+  flex-shrink:0;
+  border:0;
+  border-radius:50%;
+  background:#7da88a;
+  color:#fff;
+  font-size:20px;
+}
+
+.item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:42px;
+  padding:8px 3px;
+  border-bottom:1px dashed #dfe9dc;
+}
+
+.item:last-child{
+  border-bottom:0;
+}
+
+.item .grow{
+  flex:1;
+}
+
+.delete{
+  border:0;
+  background:transparent;
+  color:#a3b2a3;
+  font-size:18px;
+}
+
+.calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.calendar-head h2{
+  margin:0;
+  color:#63876c;
+  font-size:18px;
+}
+
+.month-btn{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#edf5e9;
+  color:#6f9276;
+  font-size:21px;
+}
+
+.week,.days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+}
+
+.week{
+  margin-bottom:5px;
+  color:#91a592;
+  font-size:9px;
+  text-align:center;
+}
+
+.days{
+  gap:4px;
+}
+
+.day{
+  min-height:67px;
+  padding:5px 3px;
+  border-radius:13px;
+  background:#fbfdf9;
+  color:#66796a;
+  text-align:center;
+  cursor:pointer;
+}
+
+.day.today{
+  background:#e8f1e2;
+  color:#5c8065;
+}
+
+.day.selected{
+  outline:2px solid #91b19a;
+  outline-offset:-2px;
+}
+
+.day-mark{
+  margin-top:3px;
+  font-size:12px;
+}
+
+.mood-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:6px;
+}
+
+.mood{
+  min-height:50px;
+  border:1px solid #dfebdc;
+  border-radius:14px;
+  background:#fbfdf8;
+  font-size:19px;
+}
+
+.mood.active{
+  background:#e0eddc;
+  border-color:#91b19a;
+}
+
+.photo-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:170px;
+  margin-top:10px;
+  border:2px dashed #cbdcc8;
+  border-radius:18px;
+  overflow:hidden;
+  background:#f7faf3;
+  color:#9aaa99;
+  text-align:center;
+}
+
+.photo-box img{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+}
+
+.grow-stage{
+  padding:25px;
+  text-align:center;
+  border-radius:24px;
+  background:linear-gradient(135deg,#f0f7e9,#fffdf5);
+}
+
+.stage-icon{
+  font-size:65px;
+}
+
+.stage-name{
+  color:#63866b;
+  font-size:18px;
+  font-weight:700;
+}
+
+.points{
+  color:#8da08e;
+}
+
+footer{
+  padding:20px;
+  text-align:center;
+  color:#a1b0a1;
+  font-size:10px;
+  letter-spacing:.12em;
+}
+
+@media(max-width:480px){
+  .logo{font-size:24px}
+  .card{padding:15px;border-radius:20px}
+  .day{min-height:60px}
+  .mood-grid{gap:4px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1 class="logo">Apple Days 🍏</h1>
+  <div class="subtitle">music · diary · little days</div>
+</header>
+
+<nav id="tabs">
+  <button class="tab active" data-page="home">🏠 Home</button>
+  <button class="tab" data-page="calendar">📅 Calendar</button>
+  <button class="tab" data-page="music">🎧 Music</button>
+  <button class="tab" data-page="diary">📖 Diary</button>
+  <button class="tab" data-page="mypage">🍏 My Page</button>
+  <button class="tab" data-page="grow">🌱 Grow</button>
+</nav>
+
+<main>
+
+<section id="home" class="page active">
+
+  <div class="card">
+    <div class="home-date">
+      <div id="homeDate"></div>
+      <div id="homeWeek"></div>
+      <div class="greeting">今日も音楽と一緒に過ごそう 🍏</div>
+    </div>
+  </div>
+
+  <div class="card hero">
+    <div class="hero-label">🍏 TODAY'S MRS. GREEN APPLE</div>
+    <div class="hero-song" id="recommendSong">---</div>
+    <div class="hero-note" id="recommendNote"></div>
+    <br>
+    <button id="randomSong">♻️ もう一度ランダム</button>
+  </div>
+
+  <div class="card">
+    <div class="title">🌿 Today's Mood</div>
+    <div class="info" id="homeMood">今日のMoodを選んでね 🍏</div>
+  </div>
+
+  <div class="card">
+    <div class="title">⏰ Today's Schedule</div>
+    <div id="homeSchedule" class="info">予定はまだないよ ♡</div>
+  </div>
+
+  <div class="card">
+    <div class="title">☑ Todo</div>
+    <div id="homeTodo">0 / 0</div>
+    <div class="progress">
+      <div id="homeProgress" class="progress-bar"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">📖 Today's Diary</div>
+    <div id="homeDiary" class="info">今日はどんな1日だった？ 🍏</div>
+  </div>
+
+  <div class="card">
+    <button class="green-button" onclick="showPage('music')">🎧 MUSICをひらく</button>
+  </div>
+
+</section>
+
+
+<section id="calendar" class="page">
+
+  <div class="card">
+    <div class="calendar-head">
+      <button class="month-btn" id="prev">‹</button>
+      <h2 id="month"></h2>
+      <button class="month-btn" id="next">›</button>
+    </div>
+
+    <div class="week">
+      <div>日</div><div>月</div><div>火</div><div>水</div>
+      <div>木</div><div>金</div><div>土</div>
+    </div>
+
+    <div id="days" class="days"></div>
+  </div>
+
+  <div class="card">
+    <div class="title">🍏 <span id="selectedDate"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="title">⏰ Schedule</div>
+    <div id="schedule"></div>
+
+    <form id="scheduleForm" class="form">
+      <input id="scheduleTime" type="time" required>
+      <input id="scheduleText" type="text" placeholder="予定を入力" required>
+      <button>＋</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="title">☑ Todo</div>
+    <div id="todos"></div>
+
+    <form id="todoForm" class="form">
+      <input id="todoText" type="text" placeholder="やること" required>
+      <button>＋</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="title">🌿 Mood</div>
+
+    <div class="mood-grid" id="moods">
+      <button class="mood" data-mood="☽ ໋꙳">☽ ໋꙳</button>
+      <button class="mood" data-mood="♡">♡</button>
+      <button class="mood" data-mood="🍏">🍏</button>
+      <button class="mood" data-mood="✨">✨</button>
+      <button class="mood" data-mood="🌿">🌿</button>
+      <button class="mood" data-mood="☁️">☁️</button>
+    </div>
+
+    <div class="info" id="selectedMood">今日のMoodを選んでね 🍏</div>
+  </div>
+
+</section>
+
+
+<section id="music" class="page">
+
+  <div class="card hero">
+    <div class="hero-label">🎧 TODAY'S SONG</div>
+    <div class="hero-song" id="musicRecommend">---</div>
+    <button onclick="chooseSong()">♻️ ランダムに選ぶ</button>
+  </div>
+
+  <div class="card">
+    <div class="title">🎧 今日聴いた曲</div>
+    <div id="musicList"></div>
+
+    <form id="musicForm" class="form">
+      <input id="musicText" type="text" placeholder="曲名を入力" required>
+      <button>＋</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="title">🍏 お気に入り</div>
+    <div id="favoriteList"></div>
+  </div>
+
+</section>
+
+
+<section id="diary" class="page">
+
+  <div class="card">
+
+    <div class="title">📖 <span id="diaryDate"></span></div>
+
+    <textarea id="diaryText" placeholder="今日あったこと、嬉しかったこと、音楽のこと……自由に書いてね 🍏"></textarea>
+
+    <br><br>
+
+    <div class="title">🌿 Mood</div>
+    <div id="diaryMood" class="info"></div>
+
+    <br>
+
+    <div class="title">🎧 今日の曲</div>
+    <div id="diaryMusic" class="info"></div>
+
+    <br>
+
+    <div class="title">📷 Photo</div>
+
+    <input type="file" id="photoInput" accept="image/*">
+
+    <div id="photoBox" class="photo-box">
+      写真を入れられるよ 🍏
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="title">📚 Diary Archive</div>
+    <div id="archive"></div>
+  </div>
+
+</section>
+
+
+<section id="mypage" class="page">
+
+  <div class="card">
+    <div class="title">🍏 My Profile</div>
+
+    <input id="profileName" placeholder="名前・ニックネーム">
+
+    <br><br>
+
+    <input id="favoriteColor" placeholder="好きな色">
+
+    <br><br>
+
+    <textarea id="favoriteThings" placeholder="好きなもの・好きな言葉など"></textarea>
+
+    <br><br>
+
+    <button class="green-button" id="saveProfile">保存する 🍏</button>
+  </div>
+
+  <div class="card">
+    <div class="title">🎧 My Favorite Songs</div>
+    <div id="mySongs"></div>
+  </div>
+
+</section>
+
+
+<section id="grow" class="page">
+
+  <div class="card grow-stage">
+    <div class="stage-icon" id="stageIcon">🌱</div>
+    <div class="stage-name" id="stageName">Seed</div>
+    <div class="points" id="points">0 points</div>
+  </div>
+
+  <div class="card">
+    <div class="title">🌱 Today's Growth</div>
+    <div id="growthInfo" class="info"></div>
+  </div>
+
+  <div class="card">
+    <div class="title">🍏 Growth Stages</div>
+    <div class="info">
+      🌱 Seed<br>
+      ↓<br>
+      🌿 Sprout<br>
+      ↓<br>
+      🍀 Clover<br>
+      ↓<br>
+      🌳 Tree<br>
+      ↓<br>
+      🍏 Apple
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Apple Days 🍏 music · diary · little days
+</footer>
+
+
+<script>
+
+const songs=[
+  "青と夏",
+  "ケセラセラ",
+  "ダンスホール",
+  "ライラック",
+  "僕のこと",
+  "Soranji",
+  "点描の唄",
+  "インフェルノ",
+  "ロマンチシズム",
+  "Magic",
+  "Dear",
+  "StaRt",
+  "WanteD! WanteD!",
+  "ニュー・マイ・ノーマル",
+  "ダーリン",
+  "familie"
+];
+
+const notes=[
+  "今日はこの曲と一緒に過ごそう 🍏",
+  "ちょっと元気をもらいたい日に。",
+  "今日の気分にそっと寄り添う1曲。",
+  "音楽を聴きながらゆっくり過ごそう 🌿",
+  "今日はこの曲を聴いてみよう。"
+];
+
+let currentDate=new Date();
+let selectedDate=new Date();
+
+function key(date){
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+}
+
+function data(k){
+  try{
+    return JSON.parse(localStorage.getItem(k)||"[]");
+  }catch{
+    return [];
+  }
+}
+
+function save(k,v){
+  localStorage.setItem(k,JSON.stringify(v));
+}
+
+function showPage(id){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.toggle("active",p.id===id);
+  });
+
+  document.querySelectorAll(".tab").forEach(t=>{
+    t.classList.toggle("active",t.dataset.page===id);
+  });
+
+  renderAll();
+}
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>showPage(tab.dataset.page));
+});
+
+
+function chooseSong(){
+
+  const song=songs[Math.floor(Math.random()*songs.length)];
+
+  localStorage.setItem("today-song",song);
+
+  document.getElementById("recommendSong").textContent=song;
+  document.getElementById("musicRecommend").textContent=song;
+
+  document.getElementById("recommendNote").textContent=
+    notes[Math.floor(Math.random()*notes.length)];
+
+  renderMusic();
+  renderHome();
+}
+
+function dailySong(){
+
+  let song=localStorage.getItem("today-song");
+
+  if(!song){
+    song=songs[Math.floor(Math.random()*songs.length)];
+    localStorage.setItem("today-song",song);
+  }
+
+  document.getElementById("recommendSong").textContent=song;
+  document.getElementById("musicRecommend").textContent=song;
+
+  document.getElementById("recommendNote").textContent=
+    notes[Math.floor(Math.random()*notes.length)];
+}
+
+document.getElementById("randomSong").onclick=chooseSong;
+
+
+function renderHome(){
+
+  const today=new Date();
+  const k=key(today);
+
+  document.getElementById("homeDate").textContent=
+    `${today.getMonth()+1}月${today.getDate()}日`;
+
+  document.getElementById("homeWeek").textContent=
+    ["日","月","火","水","木","金","土"][today.getDay()]+"曜日";
+
+  const mood=localStorage.getItem("mood-"+k);
+
+  document.getElementById("homeMood").textContent=
+    mood ? `今日のMood ${mood}` : "今日のMoodを選んでね 🍏";
+
+  let schedules=data("schedule-"+k).sort((a,b)=>
+    (a.time||"").localeCompare(b.time||"")
+  );
+
+  const now=new Date();
+  const time=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+
+  const next=schedules.find(x=>x.time>=time);
+
+  document.getElementById("homeSchedule").textContent=
+    next ? `${next.time}　${next.text}` :
+    schedules.length ? "今日の予定は終わったよ 🍏" :
+    "予定はまだないよ ♡";
+
+  const todos=data("todo-"+k);
+  const done=todos.filter(x=>x.done).length;
+
+  document.getElementById("homeTodo").textContent=
+    `${done} / ${todos.length}`;
+
+  document.getElementById("homeProgress").style.width=
+    `${todos.length ? done/todos.length*100 : 0}%`;
+
+  const diary=localStorage.getItem("diary-"+k)||"";
+
+  document.getElementById("homeDiary").textContent=
+    diary || "今日はどんな1日だった？ 🍏";
+}
+
+
+function renderCalendar(){
+
+  const year=currentDate.getFullYear();
+  const month=currentDate.getMonth();
+
+  document.getElementById("month").textContent=
+    `${year}年 ${month+1}月`;
+
+  const days=document.getElementById("days");
+  days.innerHTML="";
+
+  const first=new Date(year,month,1).getDay();
+  const last=new Date(year,month+1,0).getDate();
+
+  for(let i=0;i<first;i++){
+    days.appendChild(document.createElement("div"));
+  }
+
+  for(let d=1;d<=last;d++){
+
+    const date=new Date(year,month,d);
+    const k=key(date);
+
+    const cell=document.createElement("div");
+    cell.className="day";
+
+    if(k===key(new Date())) cell.classList.add("today");
+    if(k===key(selectedDate)) cell.classList.add("selected");
+
+    cell.innerHTML=`<div>${d}</div>`;
+
+    if(data("schedule-"+k).length)
+      cell.innerHTML+=`<div class="day-mark">⏰</div>`;
+
+    if(localStorage.getItem("mood-"+k))
+      cell.innerHTML+=`<div class="day-mark">${localStorage.getItem("mood-"+k)}</div>`;
+
+    if(localStorage.getItem("diary-"+k))
+      cell.innerHTML+=`<div class="day-mark">📖</div>`;
+
+    cell.onclick=()=>{
+      selectedDate=new Date(date);
+      renderAll();
+    };
+
+    days.appendChild(cell);
+  }
+
+  document.getElementById("selectedDate").textContent=
+    `${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日`;
+}
+
+
+document.getElementById("prev").onclick=()=>{
+  currentDate.setMonth(currentDate.getMonth()-1);
+  renderCalendar();
+};
+
+document.getElementById("next").onclick=()=>{
+  currentDate.setMonth(currentDate.getMonth()+1);
+  renderCalendar();
+};
+
+
+function renderSchedule(){
+
+  const k=key(selectedDate);
+  const el=document.getElementById("schedule");
+  const list=data("schedule-"+k);
+
+  el.innerHTML="";
+
+  if(!list.length){
+    el.innerHTML='<div class="info">予定はまだないよ ♡</div>';
+    return;
+  }
+
+  list.sort((a,b)=>a.time.localeCompare(b.time));
+
+  list.forEach((x,i)=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <span>⏰ ${x.time}</span>
+      <span class="grow">${escapeHTML(x.text)}</span>
+      <button class="delete">×</button>
+    `;
+
+    div.querySelector(".delete").onclick=()=>{
+      list.splice(i,1);
+      save("schedule-"+k,list);
+      renderAll();
+    };
+
+    el.appendChild(div);
+  });
+}
+
+
+document.getElementById("scheduleForm").onsubmit=e=>{
+  e.preventDefault();
+
+  const k=key(selectedDate);
+  const list=data("schedule-"+k);
+
+  list.push({
+    time:document.getElementById("scheduleTime").value,
+    text:document.getElementById("scheduleText").value
+  });
+
+  save("schedule-"+k,list);
+  e.target.reset();
+  renderAll();
+};
+
+
+function renderTodos(){
+
+  const k=key(selectedDate);
+  const el=document.getElementById("todos");
+  const list=data("todo-"+k);
+
+  el.innerHTML="";
+
+  if(!list.length){
+    el.innerHTML='<div class="info">Todoはまだないよ ♡</div>';
+    return;
+  }
+
+  list.forEach((x,i)=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <input type="checkbox" ${x.done?"checked":""}>
+      <span class="grow">${escapeHTML(x.text)}</span>
+      <button class="delete">×</button>
+    `;
+
+    div.querySelector("input").onchange=()=>{
+      x.done=!x.done;
+      save("todo-"+k,list);
+      renderAll();
+    };
+
+    div.querySelector(".delete").onclick=()=>{
+      list.splice(i,1);
+      save("todo-"+k,list);
+      renderAll();
+    };
+
+    el.appendChild(div);
+  });
+}
+
+
+document.getElementById("todoForm").onsubmit=e=>{
+  e.preventDefault();
+
+  const k=key(selectedDate);
+  const list=data("todo-"+k);
+
+  list.push({
+    text:document.getElementById("todoText").value,
+    done:false
+  });
+
+  save("todo-"+k,list);
+  e.target.reset();
+  renderAll();
+};
+
+
+document.querySelectorAll(".mood").forEach(button=>{
+  button.onclick=()=>{
+
+    const k=key(selectedDate);
+
+    localStorage.setItem(
+      "mood-"+k,
+      button.dataset.mood
+    );
+
+    renderAll();
+  };
+});
+
+
+function renderMood(){
+
+  const k=key(selectedDate);
+  const mood=localStorage.getItem("mood-"+k)||"";
+
+  document.querySelectorAll(".mood").forEach(b=>{
+    b.classList.toggle(
+      "active",
+      b.dataset.mood===mood
+    );
+  });
+
+  document.getElementById("selectedMood").textContent=
+    mood ? `今日のMood　${mood}` : "今日のMoodを選んでね 🍏";
+
+  document.getElementById("diaryMood").textContent=
+    mood ? mood : "まだMoodを選んでいないよ 🍏";
+}
+
+
+function renderDiary(){
+
+  const k=key(selectedDate);
+
+  document.getElementById("diaryDate").textContent=
+    `${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日`;
+
+  document.getElementById("diaryText").value=
+    localStorage.getItem("diary-"+k)||"";
+
+  const music=data("music-"+k);
+
+  document.getElementById("diaryMusic").textContent=
+    music.length ? music.map(x=>x.name).join(" / ") : "まだ曲を記録していないよ 🎧";
+
+  const photo=localStorage.getItem("photo-"+k);
+  const box=document.getElementById("photoBox");
+
+  if(photo){
+    box.innerHTML=`<img src="${photo}">`;
+  }else{
+    box.textContent="写真を入れられるよ 🍏";
+  }
+}
+
+
+document.getElementById("diaryText").oninput=e=>{
+  localStorage.setItem(
+    "diary-"+key(selectedDate),
+    e.target.value
+  );
+
+  updateGrow();
+  renderHome();
+  renderCalendar();
+};
+
+
+document.getElementById("photoInput").onchange=e=>{
+
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    localStorage.setItem(
+      "photo-"+key(selectedDate),
+      reader.result
+    );
+
+    renderDiary();
+  };
+
+  reader.readAsDataURL(file);
+};
+
+
+function renderArchive(){
+
+  const el=document.getElementById("archive");
+  el.innerHTML="";
+
+  const entries=[];
+
+  for(let i=0;i<localStorage.length;i++){
+
+    const k=localStorage.key(i);
+
+    if(k&&k.startsWith("diary-")){
+
+      const text=localStorage.getItem(k);
+
+      if(text&&text.trim()){
+        entries.push({
+          date:k.replace("diary-",""),
+          text:text
+        });
+      }
+    }
+  }
+
+  entries.sort((a,b)=>b.date.localeCompare(a.date));
+
+  if(!entries.length){
+    el.innerHTML='<div class="info">まだ日記がないよ 🍏</div>';
+    return;
+  }
+
+  entries.forEach(x=>{
+
+    const mood=localStorage.getItem("mood-"+x.date)||"";
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <span>📖</span>
+      <span class="grow">
+        <strong>${x.date} ${mood}</strong><br>
+        ${escapeHTML(x.text)}
+      </span>
+    `;
+
+    div.onclick=()=>{
+      const parts=x.date.split("-");
+      selectedDate=new Date(+parts[0],+parts[1]-1,+parts[2]);
+      showPage("diary");
+    };
+
+    el.appendChild(div);
+  });
+}
+
+
+function renderMusic(){
+
+  const k=key(selectedDate);
+  const list=data("music-"+k);
+  const el=document.getElementById("musicList");
+
+  el.innerHTML="";
+
+  if(!list.length){
+    el.innerHTML='<div class="info">まだ曲を記録していないよ 🎧</div>';
+  }
+
+  list.forEach((x,i)=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    div.innerHTML=`
+      <span>🎧</span>
+      <span class="grow">${escapeHTML(x.name)}</span>
+      <button class="delete">${x.favorite?"★":"☆"}</button>
+      <button class="delete">×</button>
+    `;
+
+    const buttons=div.querySelectorAll("button");
+
+    buttons[0].onclick=()=>{
+      x.favorite=!x.favorite;
+      save("music-"+k,list);
+      renderAll();
+    };
+
+    buttons[1].onclick=()=>{
+      list.splice(i,1);
+      save("music-"+k,list);
+      renderAll();
+    };
+
+    el.appendChild(div);
+  });
+
+  document.getElementById("musicRecommend").textContent=
+    localStorage.getItem("today-song")||songs[0];
+}
+
+
+document.getElementById("musicForm").onsubmit=e=>{
+  e.preventDefault();
+
+  const k=key(selectedDate);
+  const list=data("music-"+k);
+
+  list.push({
+    name:document.getElementById("musicText").value,
+    favorite:false
+  });
+
+  save("music-"+k,list);
+  e.target.reset();
+
+  updateGrow();
+  renderAll();
+};
+
+
+function renderFavorites(){
+
+  const el=document.getElementById("favoriteList");
+  el.innerHTML="";
+
+  const all=[];
+
+  for(let i=0;i<localStorage.length;i++){
+
+    const k=localStorage.key(i);
+
+    if(k&&k.startsWith("music-")){
+
+      data(k).forEach(x=>{
+        if(x.favorite) all.push(x.name);
+      });
+    }
+  }
+
+  if(!all.length){
+    el.innerHTML='<div class="info">お気に入り曲はまだないよ 🍏</div>';
+    return;
+  }
+
+  [...new Set(all)].forEach(x=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`<span>★</span><span>${escapeHTML(x)}</span>`;
+    el.appendChild(div);
+  });
+}
+
+
+function renderProfile(){
+
+  document.getElementById("profileName").value=
+    localStorage.getItem("profile-name")||"";
+
+  document.getElementById("favoriteColor").value=
+    localStorage.getItem("profile-color")||"";
+
+  document.getElementById("favoriteThings").value=
+    localStorage.getItem("profile-things")||"";
+
+  const el=document.getElementById("mySongs");
+  el.innerHTML="";
+
+  const favorites=[];
+
+  for(let i=0;i<localStorage.length;i++){
+
+    const k=localStorage.key(i);
+
+    if(k&&k.startsWith("music-")){
+      data(k).forEach(x=>{
+        if(x.favorite)favorites.push(x.name);
+      });
+    }
+  }
+
+  [...new Set(favorites)].forEach(x=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`🎧 ${escapeHTML(x)}`;
+    el.appendChild(div);
+  });
+}
+
+
+document.getElementById("saveProfile").onclick=()=>{
+
+  localStorage.setItem(
+    "profile-name",
+    document.getElementById("profileName").value
+  );
+
+  localStorage.setItem(
+    "profile-color",
+    document.getElementById("favoriteColor").value
+  );
+
+  localStorage.setItem(
+    "profile-things",
+    document.getElementById("favoriteThings").value
+  );
+};
+
+
+function updateGrow(){
+
+  let points=0;
+
+  for(let i=0;i<localStorage.length;i++){
+
+    const k=localStorage.key(i);
+
+    if(!k)continue;
+
+    if(k.startsWith("diary-")){
+      const value=localStorage.getItem(k);
+      if(value&&value.trim())points+=2;
+    }
+
+    if(k.startsWith("music-")){
+      points+=data(k).length;
+    }
+
+    if(k.startsWith("todo-")){
+      points+=data(k).filter(x=>x.done).length;
+    }
+
+    if(k.startsWith("schedule-")){
+      points+=data(k).length;
+    }
+  }
+
+  let icon="🌱";
+  let name="Seed";
+
+  if(points>=10){
+    icon="🌿";
+    name="Sprout";
+  }
+
+  if(points>=25){
+    icon="🍀";
+    name="Clover";
+  }
+
+  if(points>=50){
+    icon="🌳";
+    name="Tree";
+  }
+
+  if(points>=100){
+    icon="🍏";
+    name="Apple";
+
+  }
+
+  document.getElementById("stageIcon").textContent=icon;
+  document.getElementById("stageName").textContent=name;
+  document.getElementById("points").textContent=`${points} points`;
+
+  document.getElementById("growthInfo").textContent=
+    `今までの記録で ${points} points 🌱`;
+}
+
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+function renderAll(){
+
+  dailySong();
+  renderHome();
+  renderCalendar();
+  renderSchedule();
+  renderTodos();
+  renderMood();
+  renderDiary();
+  renderArchive();
+  renderMusic();
+  renderFavorites();
+  renderProfile();
+  updateGrow();
+}
+
+
+renderAll();
+
+</script>
+
+</body>
+</html>
